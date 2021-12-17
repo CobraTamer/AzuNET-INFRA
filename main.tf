@@ -17,15 +17,15 @@ provider "azurerm" {
   client_secret     = "rM9Q4ZtzH~ZDK5TNB3tN5pS1tm_n2X~rVm"
 }
 
-
+#REGION EUROPE
 resource "azurerm_resource_group" "RGWE" {
-  name     = "example-resources"
+  name     = "WERG"
   location = "West Europe"
 
 
 }
 
-# Create a virtual network within the resource group
+
 resource "azurerm_virtual_network" "coreservVNET" {
   name                = "CoreServiceVNET"
   resource_group_name = azurerm_resource_group.RGWE.name
@@ -40,5 +40,76 @@ resource "azurerm_subnet" "ServSubnet" {
   resource_group_name  = azurerm_resource_group.RGWE.name
   virtual_network_name = azurerm_virtual_network.coreservVNET.name
   address_prefixes     = ["10.0.0.0/24"]
+
+}
+
+resource "azurerm_subnet" "AppSubnet" {
+  name                 = "AppSubnet"
+  resource_group_name  = azurerm_resource_group.RGWE.name
+  virtual_network_name = azurerm_virtual_network.coreservVNET.name
+  address_prefixes     = ["10.0.2.0/27"]
+
+}
+
+resource "azurerm_subnet" "SubnetGateway" {
+  name                 = "GatewaySubnet"
+  resource_group_name  = azurerm_resource_group.RGWE.name
+  virtual_network_name = azurerm_virtual_network.coreservVNET.name
+  address_prefixes     = ["10.0.3.0/27"]
+}
+
+resource "azurerm_resource_group" "RGWE" {
+  name     = "WERG"
+  location = "West Europe"
+
+
+}
+
+# REGION WEST US
+
+
+
+resource "azurerm_resource_group" "RGWUS" {
+  name     = "WUSRG"
+  location = "West US"
+
+
+}
+
+
+resource "azurerm_virtual_network" "DevSerVNET" {
+  name                = "DevServiceVNET"
+  resource_group_name = azurerm_resource_group.RGWE.name
+  location            = azurerm_resource_group.RGWE.location
+  address_space       = ["10.10.0.0/16"]
+  
+}
+
+
+resource "azurerm_subnet" "ServSubnet" {
+  name                 = "ServSubnet"
+  resource_group_name  = azurerm_resource_group.RGWE.name
+  virtual_network_name = azurerm_virtual_network.coreservVNET.name
+  address_prefixes     = ["10.10.1.0/24"]
+
+}
+
+resource "azurerm_subnet" "AppSubnet" {
+  name                 = "AppSubnet"
+  resource_group_name  = azurerm_resource_group.RGWE.name
+  virtual_network_name = azurerm_virtual_network.coreservVNET.name
+  address_prefixes     = ["10.10.2.0/27"]
+
+}
+
+resource "azurerm_subnet" "SubnetGateway" {
+  name                 = "GatewaySubnet"
+  resource_group_name  = azurerm_resource_group.RGWE.name
+  virtual_network_name = azurerm_virtual_network.coreservVNET.name
+  address_prefixes     = ["10.10.3.0/27"]
+}
+
+
+
 
 }

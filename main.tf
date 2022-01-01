@@ -11,10 +11,11 @@ provider "azurerm" {
 
     features {}
 
-  subscription_id   = "14e8dbb8-d7b0-4435-b22d-7af2377a083f"
-  tenant_id         = "e405a8dc-779b-4896-b9d0-83b80361f3ed"
-  client_id         = "89b75521-3e67-4161-a0f8-58811e42c38e"
-  client_secret     = "rM9Q4ZtzH~ZDK5TNB3tN5pS1tm_n2X~rVm"
+  subscription_id   = "<azure_subscription_id>"
+  tenant_id         = "<azure_subscription_tenant_id>"
+  client_id         = "<service_principal_appid>"
+  client_secret     = "<service_principal_password>"
+
 }
 
 #REGION EUROPE
